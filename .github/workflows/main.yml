@@ -27,7 +27,7 @@ jobs:
             export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models &&
             source /opt/ros/humble/setup.bash &&
             rm -r ci-pipeline-trial &&
-            git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/ci-pipeline-trial.git &&
+            git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git &&
             cd ci-pipeline-trial/Turtlebot3_ws &&
             colcon build --symlink-install &&
             source install/setup.bash &&
