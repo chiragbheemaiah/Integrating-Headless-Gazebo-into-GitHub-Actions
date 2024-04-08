@@ -28,7 +28,7 @@ jobs:
             source /opt/ros/humble/setup.bash &&
             rm -r ci-pipeline-trial &&
             git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git &&
-            cd ci-pipeline-trial/Turtlebot3_ws &&
+            cd Integrating-Headless-Gazebo-into-GitHub-Actions/Turtlebot3_ws &&
             colcon build --symlink-install &&
             source install/setup.bash &&
             colcon test --event-handlers console_cohesion+
