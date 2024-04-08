@@ -3,7 +3,7 @@ name: CI Pipeline for ROS2 Turtlebot3
 on:
   push:
     branches:
-      - dev_Chirag
+      - main
 
 jobs:
   run_commands:
