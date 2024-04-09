@@ -16,12 +16,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Create bag_of_files directory
+        run: mkdir -p bag_of_files
+
       - name: Pull Docker image
         run: docker pull chiragbheemaiah/ci_pipeline_using_github_actions:latest
 
       - name: Run commands inside Docker container
         run: |
-          docker run chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
+          docker run -v $PWD/bag_of_files:/bag_of_files chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
+              ls -l
               export ROS_DOMAIN_ID=30;
               export TURTLEBOT3_MODEL=waffle;
               export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models;
@@ -29,7 +33,6 @@ jobs:
               rm -r ci-pipeline-trial;
               git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git;
               cd Integrating-Headless-Gazebo-into-GitHub-Actions/Turtlebot3_ws;
-              mkdir bag_of_files;
               colcon build --symlink-install;
               source install/setup.bash;
               colcon test --event-handlers console_cohesion+ &
@@ -37,3 +40,9 @@ jobs:
               timeout 200s ros2 bag record -a;
               ls -l
           '
+
+      - name: Upload bag_of_files as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bag_of_files
+          path: bag_of_files
