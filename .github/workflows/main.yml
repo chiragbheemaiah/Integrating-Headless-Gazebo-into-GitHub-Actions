@@ -32,6 +32,8 @@ jobs:
             mkdir bag_of_files &&
             colcon build --symlink-install &&
             source install/setup.bash &&
-            colcon test --event-handlers console_cohesion+ & cd bag_of_files && timeout 200s ros2 bag record -a &&
+            colcon test --event-handlers console_cohesion+ & &&
+            cd bag_of_files && 
+            timeout 200s ros2 bag record -a &&
             ls -l
           '
