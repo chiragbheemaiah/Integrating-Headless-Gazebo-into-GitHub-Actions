@@ -22,18 +22,18 @@ jobs:
       - name: Run commands inside Docker container
         run: |
           docker run chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
-            export ROS_DOMAIN_ID=30 &&
-            export TURTLEBOT3_MODEL=waffle &&
-            export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models &&
-            source /opt/ros/humble/setup.bash &&
-            rm -r ci-pipeline-trial &&
-            git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git &&
-            cd Integrating-Headless-Gazebo-into-GitHub-Actions/Turtlebot3_ws &&
-            mkdir bag_of_files &&
-            colcon build --symlink-install &&
-            source install/setup.bash &&
-            colcon test --event-handlers console_cohesion+ & &&
-            cd bag_of_files && 
-            timeout 200s ros2 bag record -a &&
-            ls -l
+              export ROS_DOMAIN_ID=30;
+              export TURTLEBOT3_MODEL=waffle;
+              export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models;
+              source /opt/ros/humble/setup.bash;
+              rm -r ci-pipeline-trial;
+              git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git;
+              cd Integrating-Headless-Gazebo-into-GitHub-Actions/Turtlebot3_ws;
+              mkdir bag_of_files;
+              colcon build --symlink-install;
+              source install/setup.bash;
+              colcon test --event-handlers console_cohesion+ &;
+              cd bag_of_files;
+              timeout 200s ros2 bag record -a;
+              ls -l
           '
