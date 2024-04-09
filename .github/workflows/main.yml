@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Create bag_of_files directory
-        run: mkdir -p bag_of_files
+        run: mkdir bag_of_files
 
       - name: Pull Docker image
         run: docker pull chiragbheemaiah/ci_pipeline_using_github_actions:latest
