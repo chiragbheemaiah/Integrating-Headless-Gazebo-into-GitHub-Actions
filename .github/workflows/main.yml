@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  run_commands:
+  ros2_ci_pipeline:
     runs-on: ubuntu-latest
 
     steps:
