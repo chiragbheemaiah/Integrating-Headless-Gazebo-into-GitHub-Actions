@@ -58,7 +58,10 @@ class TestGoodProcess(unittest.TestCase):
         msg = 'Goal succeeded'
         proc_output.assertWaitFor(msg, timeout=300, stream='stdout')
 
-
+class TestBadProcess(unittest.TestCase):
+    def test(self, proc_output):
+        msg = 'Goal failed'
+        proc_output.assertWaitFor(msg, timeout=50, stream='stdout')
 
 # @launch_testing.post_shutdown_test()
 # class TestProcessOutput(unittest.TestCase):
