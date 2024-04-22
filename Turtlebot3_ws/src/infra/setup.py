@@ -24,7 +24,8 @@ setup(
     entry_points={
         'console_scripts': [
             'publish_initial_pose = infra.publish_initial_pose:main',
-            'publish_goal = infra.publish_goal:main'
+            'publish_goal_success = infra.publish_goal_success:main',
+            'publish_goal_failure = infra.publish_goal_failure:main',
         ],
     },
 )
