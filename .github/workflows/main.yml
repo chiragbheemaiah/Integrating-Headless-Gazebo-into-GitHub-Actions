@@ -36,7 +36,7 @@ jobs:
               cd Integrating-Headless-Gazebo-into-GitHub-Actions/Turtlebot3_ws;
               colcon build --symlink-install;
               source install/setup.bash;
-              colcon test --event-handlers console_cohesion+ &
+              python3 -m pytest src/infra/test/ &
               cd ../../bag_of_files;
               timeout 200s ros2 bag record -a;
               ls -l
