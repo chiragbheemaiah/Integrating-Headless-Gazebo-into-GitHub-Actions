@@ -1,5 +1,8 @@
 # Integrating-Headless-Gazebo-into-GitHub-Actions
+[![CI Pipeline for ROS2 Turtlebot3](https://github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions/actions/workflows/main.yml/badge.svg)](https://github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions/actions/workflows/main.yml)
+
 Software for Robotics - CSC591 Project by cpalang@ncsu.edu, ggopala4@ncsu.edu <br><br>
+Platform - Turtlebot3 <br>
 **Summary:**<br>
 Integrating headless Gazebo simulations into the GitHub Actions pipeline for ROS2 development offers a promising solution to improve the efficiency of automated testing in robotic systems. The motivation behind this endeavor stems from the benefits of automated testing, such as eliminating human variability, speeding up bug detection, and promoting a more efficient development process through continuous integration. Operating Gazebo simulations in a headless mode, without a graphical user interface (GUI), leads to significant performance improvements by reducing computational overhead and accelerating the execution of tests [1]. This integration is designed to deliver prompt feedback on code changes, facilitating more frequent iterations and experimentation for developers.
 <br>
