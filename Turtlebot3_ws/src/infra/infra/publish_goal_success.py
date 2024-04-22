@@ -68,8 +68,8 @@ def main(args=None):
     pose.pose.orientation.z = 0.0
     pose.pose.orientation.w = 1.0
 
-    time.sleep(90)
-    print('GOAL PUBLISHING STARTS!!!!!!!!')
+    time.sleep(40)
+    # print('GOAL PUBLISHING STARTS!!!!!!!!')
     action_client.send_goal(pose)
 
     rclpy.spin(action_client)
