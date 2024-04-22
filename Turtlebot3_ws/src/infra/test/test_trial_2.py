@@ -25,7 +25,7 @@ def generate_test_description():
     proc_env['PYTHONUNBUFFERED'] = '1'
 
     dut_process = launch.actions.ExecuteProcess(
-        cmd=['ros2', 'launch', 'infra', 'initialization_success.launch.py'],
+        cmd=['ros2', 'launch', 'infra', 'initialization_failure.launch.py'],
         env=proc_env, output='screen'
     )
 
@@ -57,5 +57,5 @@ class TestGoodProcess(unittest.TestCase):
     def tearDownClass(cls):
         rclpy.shutdown()
     def test_count_to_four(self, proc_output):
-        msg = 'Goal succeeded'
+        msg = 'Goal failed'
         proc_output.assertWaitFor(msg, timeout=150, stream='stdout')

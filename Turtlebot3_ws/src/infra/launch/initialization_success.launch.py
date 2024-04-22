@@ -42,17 +42,17 @@ def generate_launch_description():
     publish_initial_pose = Node(
         package='infra',
         executable='publish_initial_pose',
+        parameters=[
+            {'x_position': -2.0}, 
+            {'y_position': -0.5},
+            {'z_position': 0.01}
+        ],
         output='screen'
     )
     
     publish_goal = Node(
         package='infra',
-        executable='publish_goal',
-        parameters=[
-            {'position_x': 1.8},
-            {'position_y': 1.1},
-            {'position_z': 0.01}
-        ],
+        executable='publish_goal_success',
         output='screen'
     )
 
