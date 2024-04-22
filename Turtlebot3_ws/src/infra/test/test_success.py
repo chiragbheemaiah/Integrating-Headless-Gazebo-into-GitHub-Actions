@@ -56,9 +56,7 @@ class TestGoodProcess(unittest.TestCase):
     # TODO: add setup and teardown methods
     def test_count_to_four(self, proc_output):
         msg = 'Goal succeeded'
-        proc_output.assertWaitFor(msg, timeout=300, stream='stdout')
-
-
+        proc_output.assertWaitFor(msg, timeout=200, stream='stdout')
 
 # @launch_testing.post_shutdown_test()
 # class TestProcessOutput(unittest.TestCase):
