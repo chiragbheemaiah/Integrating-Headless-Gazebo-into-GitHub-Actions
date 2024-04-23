@@ -68,7 +68,7 @@ def main(args=None):
     pose.pose.orientation.z = 0.0
     pose.pose.orientation.w = 1.0
 
-    time.sleep(40)
+    time.sleep(20)
     # print('GOAL PUBLISHING STARTS!!!!!!!!')
     action_client.send_goal(pose)
 
