@@ -3,6 +3,7 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import TimerAction
 import os
 from ament_index_python import get_package_share_directory
 
@@ -60,5 +61,17 @@ def generate_launch_description():
     ld.add_action(tb3_simulation_launch_file)
     ld.add_action(publish_initial_pose)
     ld.add_action(publish_goal)
+
+        # Add a timer to shut down the system after 150 seconds
+    shutdown_timer = TimerAction(
+        period=100.0,
+        actions=[Node(
+            package='launch',
+            executable='emit_event',
+            arguments=['shutdown'],
+            output='screen'
+        )]
+    )
+    ld.add_action(shutdown_timer)
 
     return ld
