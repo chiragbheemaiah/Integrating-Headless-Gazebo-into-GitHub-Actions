@@ -25,10 +25,9 @@ jobs:
       - name: Pull Docker image
         run: docker pull chiragbheemaiah/ci_pipeline_using_github_actions:latest
 
-      - name: Run commands inside Docker container
+      - name: Running Turtlebot testsuite inside Docker container
         run: |
           docker run -v $PWD/bag_of_files:/bag_of_files chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
-              ls -l
               export ROS_DOMAIN_ID=30;
               export TURTLEBOT3_MODEL=waffle;
               export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models;
@@ -45,10 +44,9 @@ jobs:
               source install/setup.bash;
               python3 -m pytest src/infra/test/ &
               cd ../../bag_of_files;
-              timeout 200s ros2 bag record -a;
-              ls -l
-          '
-
+              timeout 450s ros2 bag record -a;
+              '
+            
       - name: Upload bag_of_files as artifact
         uses: actions/upload-artifact@v2
         with:
