@@ -44,7 +44,7 @@ jobs:
               source install/setup.bash;
               python3 -m pytest src/infra/test/ &
               cd ../../bag_of_files;
-              timeout 400s ros2 bag record -a;
+              timeout 450s ros2 bag record -a;
               '
             
       - name: Upload bag_of_files as artifact
