@@ -19,9 +19,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Create bag_of_files directory
-        run: mkdir bag_of_files
-
       - name: Pull Docker image
         run: docker pull chiragbheemaiah/ci_pipeline_using_github_actions:latest
 
@@ -42,13 +39,5 @@ jobs:
               cp src/infra/worlds/2x_world_only.model /opt/ros/humble/share/nav2_bringup/worlds/world_only.model;
               colcon build --symlink-install;
               source install/setup.bash;
-              ros2 bag record -a -o ../../bag_of_files & pid_rosbag=$!;
               python3 -m pytest src/infra/test/;
-              kill -s SIGINT $pid_rosbag
               '
-            
-      - name: Upload bag_of_files as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: bag_of_files
-          path: bag_of_files
