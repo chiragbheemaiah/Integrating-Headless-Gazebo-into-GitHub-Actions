@@ -14,36 +14,9 @@ class NavigateToPoseActionClient(Node):
         self._action_client = ActionClient(self, NavigateToPose, '/navigate_to_pose')
         # self.distance_threshold = 0.4
 
-        # Define parameters
-        self.declare_parameters(
-                namespace='',
-                parameters=[
-                    ('position_x', 1.8),
-                    ('position_y', 1.1),
-                    ('position_z', 0.01),
-                    ('orientation_x', 0.0),
-                    ('orientation_y', 0.0),
-                    ('orientation_z', 0.0),
-                    ('orientation_w', 1.0),
-                    ]
-                )
-
-    def send_goal(self):
-        pose = PoseStamped()
-        pose.header.stamp.sec = 0
-        pose.header.stamp.nanosec = 0
-        pose.header.frame_id = 'map'
-        
+    def send_goal(self, pose):
         goal_msg = NavigateToPose.Goal()
         goal_msg.pose = pose
-
-        pose.pose.position.x = self.get_parameter('position_x').value
-        pose.pose.position.y = self.get_parameter('position_y').value
-        pose.pose.position.z = self.get_parameter('position_z').value
-        pose.pose.orientation.x = self.get_parameter('orientation_x').value
-        pose.pose.orientation.y = self.get_parameter('orientation_y').value
-        pose.pose.orientation.z = self.get_parameter('orientation_z').value
-        pose.pose.orientation.w = self.get_parameter('orientation_w').value
 
         self._action_client.wait_for_server()
 
@@ -68,6 +41,15 @@ class NavigateToPoseActionClient(Node):
 
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
+        # self.get_logger().info('Received feedback:')
+        # print('Current Pose:', feedback.current_pose)
+        # print('Navigation Time:', feedback.navigation_time.sec, 'seconds')
+        # print('Estimated Time Remaining:', feedback.estimated_time_remaining.sec, 'seconds')
+        # print('Number of Recoveries:', feedback.number_of_recoveries)
+        # print('Distance Remaining:', feedback.distance_remaining)
+        # if (feedback.distance_remaining < self.distance_threshold):
+        #     print('GOAL STATE REACHED!')
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -91,6 +73,7 @@ def main(args=None):
     action_client.send_goal(pose)
 
     rclpy.spin(action_client)
+
 
 if __name__ == '__main__':
     main()
