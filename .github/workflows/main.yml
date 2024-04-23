@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+      - dev_Chirag
+      - dev_girish
 
 jobs:
   ros2_ci_pipeline:
