@@ -24,7 +24,7 @@ jobs:
 
       - name: Running Turtlebot testsuite inside Docker container
         run: |
-          docker run -v $PWD/bag_of_files:/bag_of_files chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
+          docker run chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
               export ROS_DOMAIN_ID=30;
               export TURTLEBOT3_MODEL=waffle;
               export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models;
