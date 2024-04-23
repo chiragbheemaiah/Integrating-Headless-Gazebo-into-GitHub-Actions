@@ -34,7 +34,7 @@ jobs:
               export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models;
               source /opt/ros/humble/setup.bash;
               rm -r ci-pipeline-trial;
-              git clone -b dev_Chirag https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git;
+              git clone https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/chiragbheemaiah/Integrating-Headless-Gazebo-into-GitHub-Actions.git;
               cd Integrating-Headless-Gazebo-into-GitHub-Actions/Turtlebot3_ws;
               if [ ! -f src/infra/worlds/2x_world_only.model ]; then
               echo "Error: model file does not exist."
