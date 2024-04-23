@@ -28,7 +28,6 @@ jobs:
       - name: Run commands inside Docker container
         run: |
           docker run -v $PWD/bag_of_files:/bag_of_files chiragbheemaiah/ci_pipeline_using_github_actions:latest bash -c '
-              ls -l
               export ROS_DOMAIN_ID=30;
               export TURTLEBOT3_MODEL=waffle;
               export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models;
@@ -43,14 +42,11 @@ jobs:
               cp src/infra/worlds/2x_world_only.model /opt/ros/humble/share/nav2_bringup/worlds/world_only.model;
               colcon build --symlink-install;
               source install/setup.bash;
-              python3 -m pytest src/infra/test/ &
-              cd ../../bag_of_files;
-              timeout 200s ros2 bag record -a;
-              ls -l
-          '
-
-      - name: Upload bag_of_files as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: bag_of_files
-          path: bag_of_files
+              python3 -m pytest src/infra/test/
+              '
+              
+      # - name: Upload bag_of_files as artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: bag_of_files
+          # path: bag_of_files
