@@ -58,9 +58,9 @@ def generate_launch_description():
     ld.add_action(publish_initial_pose)
     ld.add_action(publish_goal)
 
-    # Add a timer to shut down the system after 150 seconds
+    # Add a timer to shut down the system after 60 seconds
     shutdown_timer = TimerAction(
-        period=100.0,
+        period=60.0,
         actions=[Node(
             package='launch',
             executable='emit_event',
