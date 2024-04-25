@@ -28,7 +28,28 @@ Changing the simulated environment.
 Analyzing the performance of the bot by varying various parameters such as velocity, time, etc.
 Compare and contrast the tools used to implement this pipeline.
 <br><br>
-**Milestones:**<br>
+**Milestones:** <br>
 ![image](https://media.github.ncsu.edu/user/29852/files/10c28f83-f9dc-45e0-b0a7-5c105df9aa4f)
+
+
+**Contributions:** <br>
+**Chirag**
+1. Turtlebot3 setup and exploration
+2. Defining ROS2 nodes for initial_pose and goal_pose, defining launch files for the integrated system
+3. Dockerizing the test environment
+4. Implementing the positive test case (Reachable navigation scenario)
+
+**Girish**
+1. Implementing the negative test case (Unreachable navigation scenario)
+2. CI Pipeline Setup
+3. Experimenting with simulation parameters for increasing efficiency of the pipeline
+
+**Lessons Learnt and Challenges Faced**
+1. The main challenge over the course of the project was that processes launched needed to be shut down in a certain order for the system to not crash when using a launch file. Especially processes relating to the Gazebo needed to be killed first followed by other processes, otherwise the entire system would just crash. We came across this problem while running automated tests wherein all the processes were shut down randomly once the test had concluded without waiting for the graceful termination of the process. We handled this challenge by integrating different sleep cycles for processes to shut down properly.
+2. We first started out with using the `colcon test` framework for developing automated test suites. However, the lack of documentation of the `launch_test` framework which colcon test recommends affected our progress significantly due to the aforementioned reasons. Therefore, we migrated to the `pytest` framework wherein we waited for the launch process to complete execution gracefully and then proceeded with the tests.
+3. During the initial iterations of our pipeline, we experimented with an approach where we configured the Ubuntu container provided by GitHub Actions with ROS2 Humble packages. We then checked out our repository and ran the automated testing suites. However, the build time for such a system was ~ 45 mins. Hence we dockerized the test environment and pulled it as an image inside the GitHub Actions container and ran our testing within this isolated container. This approach helped us reduce our build times to ~ 4 mins.
+4. We used a **dev-container** (an extension of VS Code) which helps with seamless integration of VS Code with Docker containers which abstracted away the usual hassles of setting up ROS on a local system. Port forwarding mechanism and pre-configured when launching this setup helped to stream the visual output from the containers to the development environment through X11 forwarding. However, the current version of this extension has a bug where it increments the $DISPLAY system variable automatically. We solved this problem by initializing the $DISPLAY:=0 in the .bashrc script of the system. This particular approach helped greatly streamline our development process and is greatly recommended.
+5. The integration of GitHub Actions workflow with our repository taught us the importance of following good software engineering practices. Pull Requests verified by these workflows greatly help an organization in reviewing code contributions and overall increasing the efficiency of the software developmental process.
+
 
 
